@@ -43,6 +43,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -89,11 +117,154 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\American\american1.jpg" />
+    <Content Include="Content\Images\American\american10.jpg" />
+    <Content Include="Content\Images\American\american2.jpg" />
+    <Content Include="Content\Images\American\american3.jpg" />
+    <Content Include="Content\Images\American\american4.jpg" />
+    <Content Include="Content\Images\American\american5.jpg" />
+    <Content Include="Content\Images\American\american6.jpg" />
+    <Content Include="Content\Images\American\american7.jpg" />
+    <Content Include="Content\Images\American\american8.jpg" />
+    <Content Include="Content\Images\American\american9.jpg" />
+    <Content Include="Content\Images\Asian\asian1.jpg" />
+    <Content Include="Content\Images\Asian\asian10.jpg" />
+    <Content Include="Content\Images\Asian\asian2.jpg" />
+    <Content Include="Content\Images\Asian\asian3.jpg" />
+    <Content Include="Content\Images\Asian\asian4.jpg" />
+    <Content Include="Content\Images\Asian\asian5.jpg" />
+    <Content Include="Content\Images\Asian\asian6.jpg" />
+    <Content Include="Content\Images\Asian\asian7.jpg" />
+    <Content Include="Content\Images\Asian\asian8.jpg" />
+    <Content Include="Content\Images\Asian\asian9.jpg" />
+    <Content Include="Content\Images\Classic\classic1.jpg" />
+    <Content Include="Content\Images\Classic\classic10.jpg" />
+    <Content Include="Content\Images\Classic\classic2.jpg" />
+    <Content Include="Content\Images\Classic\classic3.jpg" />
+    <Content Include="Content\Images\Classic\classic4.jpg" />
+    <Content Include="Content\Images\Classic\classic5.jpg" />
+    <Content Include="Content\Images\Classic\classic6.jpg" />
+    <Content Include="Content\Images\Classic\classic7.jpg" />
+    <Content Include="Content\Images\Classic\classic8.jpg" />
+    <Content Include="Content\Images\Classic\classic9.jpg" />
+    <Content Include="Content\Images\Country\country1.jpg" />
+    <Content Include="Content\Images\Country\country10.jpg" />
+    <Content Include="Content\Images\Country\country2.jpg" />
+    <Content Include="Content\Images\Country\country3.jpg" />
+    <Content Include="Content\Images\Country\country4.jpg" />
+    <Content Include="Content\Images\Country\country5.jpg" />
+    <Content Include="Content\Images\Country\country6.jpg" />
+    <Content Include="Content\Images\Country\country7.jpg" />
+    <Content Include="Content\Images\Country\country8.jpg" />
+    <Content Include="Content\Images\Country\country9.jpg" />
+    <Content Include="Content\Images\Eclectic\eclectic1.jpg" />
+    <Content Include="Content\Images\Eclectic\eclectic10.jpg" />
+    <Content Include="Content\Images\Eclectic\eclectic2.jpg" />
+    <Content Include="Content\Images\Eclectic\eclectic3.jpg" />
+    <Content Include="Content\Images\Eclectic\eclectic4.jpg" />
+    <Content Include="Content\Images\Eclectic\eclectic5.jpg" />
+    <Content Include="Content\Images\Eclectic\eclectic6.jpg" />
+    <Content Include="Content\Images\Eclectic\eclectic7.jpg" />
+    <Content Include="Content\Images\Eclectic\eclectic8.jpg" />
+    <Content Include="Content\Images\Eclectic\eclectic9.jpg" />
+    <Content Include="Content\Images\Industrial\industrial1.jpg" />
+    <Content Include="Content\Images\Industrial\industrial10.jpg" />
+    <Content Include="Content\Images\Industrial\industrial2.jpg" />
+    <Content Include="Content\Images\Industrial\industrial3.jpg" />
+    <Content Include="Content\Images\Industrial\industrial4.jpg" />
+    <Content Include="Content\Images\Industrial\industrial5.jpg" />
+    <Content Include="Content\Images\Industrial\industrial6.jpg" />
+    <Content Include="Content\Images\Industrial\industrial7.jpg" />
+    <Content Include="Content\Images\Industrial\industrial8.jpg" />
+    <Content Include="Content\Images\Industrial\industrial9.jpg" />
+    <Content Include="Content\Images\Maritime\maritime1.jpg" />
+    <Content Include="Content\Images\Maritime\maritime10.jpg" />
+    <Content Include="Content\Images\Maritime\maritime2.jpg" />
+    <Content Include="Content\Images\Maritime\maritime3.jpg" />
+    <Content Include="Content\Images\Maritime\maritime4.jpg" />
+    <Content Include="Content\Images\Maritime\maritime5.jpg" />
+    <Content Include="Content\Images\Maritime\maritime6.jpg" />
+    <Content Include="Content\Images\Maritime\maritime7.jpg" />
+    <Content Include="Content\Images\Maritime\maritime8.jpg" />
+    <Content Include="Content\Images\Maritime\maritime9.jpg" />
+    <Content Include="Content\Images\Mediterranean\mediterranean1.jpg" />
+    <Content Include="Content\Images\Mediterranean\mediterranean10.jpg" />
+    <Content Include="Content\Images\Mediterranean\mediterranean2.jpg" />
+    <Content Include="Content\Images\Mediterranean\mediterranean3.jpg" />
+    <Content Include="Content\Images\Mediterranean\mediterranean4.jpg" />
+    <Content Include="Content\Images\Mediterranean\mediterranean5.jpg" />
+    <Content Include="Content\Images\Mediterranean\mediterranean6.jpg" />
+    <Content Include="Content\Images\Mediterranean\mediterranean7.jpg" />
+    <Content Include="Content\Images\Mediterranean\mediterranean8.jpg" />
+    <Content Include="Content\Images\Mediterranean\mediterranean9.jpg" />
+    <Content Include="Content\Images\Modern\modern1.jpg" />
+    <Content Include="Content\Images\Modern\modern10.jpg" />
+    <Content Include="Content\Images\Modern\modern2.jpg" />
+    <Content Include="Content\Images\Modern\modern3.jpg" />
+    <Content Include="Content\Images\Modern\modern4.jpg" />
+    <Content Include="Content\Images\Modern\modern5.jpg" />
+    <Content Include="Content\Images\Modern\modern6.jpg" />
+    <Content Include="Content\Images\Modern\modern7.jpg" />
+    <Content Include="Content\Images\Modern\modern8.jpg" />
+    <Content Include="Content\Images\Modern\modern9.jpg" />
+    <Content Include="Content\Images\Retro\retro1.jpg" />
+    <Content Include="Content\Images\Retro\retro10.jpg" />
+    <Content Include="Content\Images\Retro\retro2.jpg" />
+    <Content Include="Content\Images\Retro\retro3.jpg" />
+    <Content Include="Content\Images\Retro\retro4.jpg" />
+    <Content Include="Content\Images\Retro\retro5.jpg" />
+    <Content Include="Content\Images\Retro\retro6.jpg" />
+    <Content Include="Content\Images\Retro\retro7.jpg" />
+    <Content Include="Content\Images\Retro\retro8.jpg" />
+    <Content Include="Content\Images\Retro\retro9.jpg" />
+    <Content Include="Content\Images\Rustic\rustic1.jpg" />
+    <Content Include="Content\Images\Rustic\rustic10.jpg" />
+    <Content Include="Content\Images\Rustic\rustic2.jpg" />
+    <Content Include="Content\Images\Rustic\rustic3.jpg" />
+    <Content Include="Content\Images\Rustic\rustic4.jpg" />
+    <Content Include="Content\Images\Rustic\rustic5.jpg" />
+    <Content Include="Content\Images\Rustic\rustic6.jpg" />
+    <Content Include="Content\Images\Rustic\rustic7.jpg" />
+    <Content Include="Content\Images\Rustic\rustic8.jpg" />
+    <Content Include="Content\Images\Rustic\rustic9.jpg" />
+    <Content Include="Content\Images\Scandinavian\scandinavian1.jpg" />
+    <Content Include="Content\Images\Scandinavian\scandinavian10.jpg" />
+    <Content Include="Content\Images\Scandinavian\scandinavian2.jpg" />
+    <Content Include="Content\Images\Scandinavian\scandinavian3.jpg" />
+    <Content Include="Content\Images\Scandinavian\scandinavian4.jpg" />
+    <Content Include="Content\Images\Scandinavian\scandinavian5.jpg" />
+    <Content Include="Content\Images\Scandinavian\scandinavian6.jpg" />
+    <Content Include="Content\Images\Scandinavian\scandinavian7.jpg" />
+    <Content Include="Content\Images\Scandinavian\scandinavian8.jpg" />
+    <Content Include="Content\Images\Scandinavian\scandinavian9.jpg" />
+    <Content Include="Content\Images\Tropical\tropical1.jpg" />
+    <Content Include="Content\Images\Tropical\tropical10.jpg" />
+    <Content Include="Content\Images\Tropical\tropical2.jpg" />
+    <Content Include="Content\Images\Tropical\tropical3.jpg" />
+    <Content Include="Content\Images\Tropical\tropical4.jpg" />
+    <Content Include="Content\Images\Tropical\tropical5.jpg" />
+    <Content Include="Content\Images\Tropical\tropical6.jpg" />
+    <Content Include="Content\Images\Tropical\tropical7.jpg" />
+    <Content Include="Content\Images\Tropical\tropical8.jpg" />
+    <Content Include="Content\Images\Tropical\tropical9.jpg" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
+    <Content Include="Views\Main\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -102,6 +273,16 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -111,8 +292,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
