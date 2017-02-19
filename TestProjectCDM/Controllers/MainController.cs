@@ -8,6 +8,10 @@ namespace TestProjectCDM.Controllers
 {
     public class MainController : Controller
     {
+        public MainController()
+        {
+            
+        }
         // GET: Main
         public ActionResult Index()
         {
