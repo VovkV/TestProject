@@ -317,6 +317,12 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestProjectCDM.Data\TestProjectCDM.Data.csproj">
+      <Project>{BD7999A8-391D-4DD4-9AF7-AA61DDB47606}</Project>
+      <Name>TestProjectCDM.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,17 +1,15 @@
-﻿
+﻿@model IEnumerable<string>
 @{
     ViewBag.Title = "Test";
 }
 <p><h2 class="text-center">Click on picture that you like more</h2></p>
 <div class="row jumbotron">
-    <div class="col-lg-6">
-        <a href="#" >
-            <img src="~/Content/Images/American/american1.jpg" class="img-thumbnail img-transform">
-        </a>
-    </div>
-    <div class="col-lg-6">
-        <a href="#" >
-            <img src="~/Content/Images/American/american10.jpg" class="img-thumbnail img-transform">
-        </a>
-    </div>
+    @foreach (var link in Model)
+    {
+        <div class="col-lg-6">
+            <a href="#">
+                <img src="@Href(link)" class="img-thumbnail img-transform">
+            </a>
+        </div>
+    }
 </div>

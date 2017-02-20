@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ninject;
+using TestProjectCDM.Data.Interfaces;
+using TestProjectCDM.Data.Models;
 
 namespace TestProjectCDM.Infractructure
 {
@@ -27,6 +29,7 @@ namespace TestProjectCDM.Infractructure
 
         private void AddBindings()
         {
+            kernel.Bind<IImageLinkGetter>().To<ImageLinkGetter>();
         }
     }
 }
