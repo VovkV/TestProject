@@ -1,15 +1,9 @@
-﻿@model IEnumerable<string>
-@{
+﻿@{
     ViewBag.Title = "Test";
 }
 <p><h2 class="text-center">Click on picture that you like more</h2></p>
-<div class="row jumbotron">
-    @foreach (var link in Model)
-    {
-        <div class="col-lg-6">
-            <a href="#">
-                <img src="@Href(link)" class="img-thumbnail img-transform">
-            </a>
-        </div>
-    }
-</div>
+    <div class="row jumbotron" id="img-update">
+        @Html.Action("TestPartial")
+
+    </div>
+
