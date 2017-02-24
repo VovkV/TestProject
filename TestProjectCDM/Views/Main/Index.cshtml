@@ -1,10 +1,13 @@
-﻿
+﻿@using Recaptcha.Web.Mvc;
 @{
     ViewBag.Title = "Index";
 }
 <div class="text-center">
     <h2>Hello</h2>
-    <h3>Click on button to start test</h3>
+    <h3>Insert your name and result of captcha</h3>
+    <div align="center">
+        @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.Dark)
+    </div>
     <a href="@Url.Action("Test", "Main")" class="btn btn-primary btn-lg">
         <h4>Start</h4>
     </a>
