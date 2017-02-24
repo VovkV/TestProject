@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Ninject;
 using TestProjectCDM.Data.Interfaces;
 using TestProjectCDM.Data.Models;
+using TestProjectCDM.Implementation;
 
 namespace TestProjectCDM.Infractructure
 {
@@ -29,7 +30,8 @@ namespace TestProjectCDM.Infractructure
 
         private void AddBindings()
         {
-            kernel.Bind<IImageLinkGetter>().To<ImageLinkGetter>();
+            kernel.Bind<IImageRepository>().To<MongoImageRepository>();
+            kernel.Bind<ITestsRepository>().To<MongoTestsRepository>();
         }
     }
 }

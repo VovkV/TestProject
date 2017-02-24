@@ -3,14 +3,15 @@
 
 @foreach (var link in Model)
 {
-    @Ajax.RawActionLink(string.Format("<div class='col-lg-6'>"+
-                                        "<img src="+@Href(link)+" class='img-thumbnail img-transform'>"+
-                                     "</div>"), 
-        "TestPartial", 
+    @Ajax.RawActionLink(
+        string.Format("<div class='col-lg-6'>"
+        + "<img src=" + @Href(link) + " class='img-thumbnail img-transform'>"
+        + "</div>"),
+        "TestPartial",
         new AjaxOptions()
         {
             UpdateTargetId = "img-update"
-        });
+        })
 
 
 }

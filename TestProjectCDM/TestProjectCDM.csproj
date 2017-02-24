@@ -287,7 +287,6 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -325,6 +324,10 @@
     <ProjectReference Include="..\TestProjectCDM.Data\TestProjectCDM.Data.csproj">
       <Project>{BD7999A8-391D-4DD4-9AF7-AA61DDB47606}</Project>
       <Name>TestProjectCDM.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestProjectCDM.Implementation\TestProjectCDM.Implementation.csproj">
+      <Project>{B5B00FCA-D5A4-429F-893F-803021B2ED4F}</Project>
+      <Name>TestProjectCDM.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
