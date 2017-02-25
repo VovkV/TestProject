@@ -5,10 +5,20 @@
 <div class="text-center">
     <h2>Hello</h2>
     <h3>Insert your name and result of captcha</h3>
-    <div align="center">
-        @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.Dark)
-    </div>
-    <a href="@Url.Action("Test", "Main")" class="btn btn-primary btn-lg">
-        <h4>Start</h4>
-    </a>
+    @using (Html.BeginForm())
+    {
+        <div align="center" class="form-group">
+            <div class="form-group" style="margin-bottom: 20px; margin-top: 20px">
+                @Html.Label("Username", new { @class = "control-label" })
+                @Html.TextBox("Username" ,"", new { @class = "form-control" })
+            </div>
+            <div class="form-group" style="margin-bottom: 20px; margin-top: 20px">
+                @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.Dark)
+            </div>
+            <div class="form-group" style="margin-bottom: 20px; margin-top: 20px">
+                <input type="submit" class="btn btn-default" value="Start" />
+            </div>
+        </div>
+    }
 </div>
+
