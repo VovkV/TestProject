@@ -36,21 +36,24 @@ namespace TestProjectCDM.Controllers
             var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
             var obj = JObject.Parse(result);
             var status = (bool)obj.SelectToken("success");
-            if (status)
-                return RedirectToAction("Test");
-            return View("Index");
+
+            if (!status)//if captcha wasn't solved
+                return View("Index");
+
+            Session["Test"] = new Test() {Username = username};
+            return RedirectToAction("Test");
+            
 
         }
         public ActionResult Test()
         {
-            //var userId = Guid.NewGuid();
-            //Session["UserId"] = userId;
-            //Session["ImageLinkGetter"] = new ImageLinkGetter();
+            if(Session["Test"]==null)
+                return RedirectToAction("Index");
+
             return View();
         }
         public PartialViewResult TestPartial()
         {
-            //var t = (IImageLinkGetter)Session["ImageLinkGetter"];
             int imgCount = 2;//Count of images in test
             List<string> links = new List<string>(imgCount);
             for (int i = 0; i < imgCount; i++)
