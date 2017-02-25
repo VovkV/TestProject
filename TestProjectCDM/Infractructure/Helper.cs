@@ -13,10 +13,10 @@ namespace TestProjectCDM.Infractructure
         /// This method is decoration around .ActionLink() and helps input HTML into linkText
         /// </summary>
         public static MvcHtmlString RawActionLink(this AjaxHelper ajaxHelper, string linkText, string actionName,
-            AjaxOptions ajaxOptions)
+            object routeValues,AjaxOptions ajaxOptions)
         {
             var repId = Guid.NewGuid().ToString();
-            var lnk = ajaxHelper.ActionLink(repId, actionName, ajaxOptions);
+            var lnk = ajaxHelper.ActionLink(repId, actionName,routeValues, ajaxOptions);
             return MvcHtmlString.Create(lnk.ToString().Replace(repId, linkText));
         }
     }

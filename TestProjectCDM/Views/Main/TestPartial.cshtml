@@ -1,17 +1,19 @@
 ﻿@using TestProjectCDM.Infractructure
-@model IEnumerable<string>
+@using TestProjectCDM.Data.Models
 
-@foreach (var link in Model)
+@model IEnumerable<Image>
+
+@foreach (var image in Model)
 {
     @Ajax.RawActionLink(
         string.Format("<div class='col-lg-6'>"
-        + "<img src=" + @Href(link) + " class='img-thumbnail img-transform'>"
-        + "</div>"),
+                      + "<img src=" + @Href(image.Link) + " class='img-thumbnail img-transform'>"
+                      + "</div>"),
         "TestPartial",
+        new {id = image.StyleId},
         new AjaxOptions()
         {
             UpdateTargetId = "img-update"
         })
-
 
 }

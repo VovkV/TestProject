@@ -22,6 +22,7 @@ namespace TestProjectCDM.Controllers
             _imgRepo = imageRepository;
             _testsRepo = testsRepository;
         }
+
         public ActionResult Index()
         {
             return View();
@@ -45,20 +46,55 @@ namespace TestProjectCDM.Controllers
             
 
         }
+
         public ActionResult Test()
         {
-            if(Session["Test"]==null)
+            if(Session["Test"]==null)//check registration
                 return RedirectToAction("Index");
 
+            //var testChoises = new List<TestChoise>();
+
+            //foreach (var style in _imgRepo.GetAllStyles())
+            //{
+            //    testChoises.Add(new TestChoise() { Count = 0, StyleId = style.Id });
+            //}
+            //((Test) Session["Test"]).TestChoises = testChoises;
+            //Session["Count"] = 0;//count of test choises
             return View();
         }
-        public PartialViewResult TestPartial()
+
+        public ActionResult TestPartial(int? id)
         {
-            int imgCount = 2;//Count of images in test
-            List<string> links = new List<string>(imgCount);
-            for (int i = 0; i < imgCount; i++)
+
+            if (!ControllerContext.IsChildAction && (!Request.IsAjaxRequest()))
             {
-                links.Add("");
+                return RedirectToAction("Test");
+            }
+
+            //if (id != null)
+            //{
+            //    var chosenStyle = ((Test)Session["Test"]).TestChoises.Find(x => x.StyleId == id);
+            //    chosenStyle.Count++;
+            //    Session["Count"] = (int) Session["Count"] + 1;
+            //}
+
+            //Random rnd = new Random();
+            //int styleMaxId = _imgRepo.GetAllStyles().Count;
+
+            //int imgCount = 2;//Count of images in one view
+            //List<Image> links = new List<Image>(imgCount);
+            //for (int i = 1; i <= imgCount; i++)
+            //{
+            //    int styleId = rnd.Next(1, styleMaxId + 1);
+            //    int imageId = rnd.Next(1, _imgRepo.GetImagesByStyleId(styleId).Count + 1);
+            //    var image = _imgRepo.GetImageById(styleId, imageId);
+            //    links.Add(image);
+            //}
+            List<Image> links = new List<Image>(2);
+            for (int i = 1; i <= 2; i++)
+            {
+                var image = new Image();
+                links.Add(image);
             }
 
             return PartialView(links);
