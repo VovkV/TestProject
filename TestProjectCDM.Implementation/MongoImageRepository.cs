@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
@@ -21,11 +22,12 @@ namespace TestProjectCDM.Implementation
             _collection = database.GetCollection<Style>("Styles");
         }
 
-        public bool FillDb(string path)
+        public bool FillDb(string fullPath, string folderPath)
         {
-            if (Directory.Exists(path))
+            
+            if (Directory.Exists(fullPath))
             {
-                var styleFolders = Directory.GetDirectories(path);
+                var styleFolders = Directory.GetDirectories(fullPath);
                 for (int i = 0; i < styleFolders.Length; i++)
                 {
                     var style = new Style();
@@ -38,7 +40,7 @@ namespace TestProjectCDM.Implementation
                         var image = new Image();
                         image.Id = j + 1;
                         image.StyleId = i + 1;
-                        image.Link = images[j];
+                        image.Link = images[j].Replace(fullPath,"~" + folderPath).Replace(@"\", "/");
                         style.Images.Add(image);
                     }
 

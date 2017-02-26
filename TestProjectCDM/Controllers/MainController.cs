@@ -26,6 +26,8 @@ namespace TestProjectCDM.Controllers
 
         public ActionResult Index()
         {
+            _imgRepo.FillDb(Server.MapPath("~/Content/Images"),"/Content/Images");
+
             return View();
         }
 
@@ -89,6 +91,7 @@ namespace TestProjectCDM.Controllers
                 int styleId = rnd.Next(1, styleMaxId + 1);
                 int imageId = rnd.Next(1, _imgRepo.GetImagesByStyleId(styleId).Count + 1);
                 var image = _imgRepo.GetImageById(styleId, imageId);
+                
                 links.Add(image);
             }
 
