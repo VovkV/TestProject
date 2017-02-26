@@ -83,13 +83,13 @@ namespace TestProjectCDM.Implementation
             return result;
         }
 
-        public List<Image> GetImagesByStyleId(int id)
+        public Style GetStyleById(int id)
         {
-            List<Image> result = null;
+            Style result = null;
 
             var filtered = _collection.Find(p => p.Id == id).ToList();
 
-            result = filtered.First().Images;
+            result = filtered.First();
 
             return result;
         }

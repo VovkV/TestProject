@@ -12,7 +12,7 @@ namespace TestProjectCDM.Data.Interfaces
         bool FillDb(string fullPath, string folderPath);
         List<Style> GetAllStyles();
         Image GetImageById(int styleId, int imageId);
-        List<Image> GetImagesByStyleId(int id);
+        Style GetStyleById(int id);
         bool UpsertImage(int styleId, Image image);
         bool UpsertStyle(Style style);
         bool RemoveImageById(int styleId, int imageId);

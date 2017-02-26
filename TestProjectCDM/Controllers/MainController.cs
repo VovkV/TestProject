@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using TestProjectCDM.Data.Interfaces;
 using TestProjectCDM.Data.Models;
 
@@ -23,7 +24,7 @@ namespace TestProjectCDM.Controllers
                 Find(x => x.StyleId == styleId).ShowedImages;
             Random rnd = new Random();
             int result;
-            int maxId = _imgRepo.GetImagesByStyleId(styleId).Count;
+            int maxId = _imgRepo.GetStyleById(styleId).Images.Count;
             bool wasShown;
 
             //--- generate random image id and check was it shown
@@ -127,6 +128,7 @@ namespace TestProjectCDM.Controllers
                 var winners = choises.FindAll(x => x.Count == choises.Max(y => y.Count));
                 if (winners.Count == 1)
                 {
+                    Session["WinnerId"] = winners.First().StyleId;
                     return RedirectToAction("Result");
                 }
                 else
@@ -156,12 +158,16 @@ namespace TestProjectCDM.Controllers
 
             return PartialView(result);
         }
-
-        public string Result()
+        public ActionResult Result()
         {
-            var choises = ((Test) Session["Test"]).TestChoises;
-            var winner = choises.FindAll(x => x.Count == choises.Max(y => y.Count)).First();
-            return winner.StyleId.ToString();
+            if (Session["WinnerId"] == null)
+                return RedirectToAction("Index");
+
+            int styleId = ((int) Session["WinnerId"]);
+            var result = _imgRepo.GetStyleById(styleId);
+            Session.Clear();
+
+            return PartialView(result);
         }
     }
 }
