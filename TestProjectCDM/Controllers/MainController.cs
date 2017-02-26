@@ -11,7 +11,6 @@ using TestProjectCDM.Data.Models;
 using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
 using TestProjectCDM.Implementation;
-using TestProjectCDM.Models;
 
 namespace TestProjectCDM.Controllers
 {
