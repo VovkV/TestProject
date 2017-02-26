@@ -11,8 +11,6 @@ namespace TestProjectCDM.Data.Models
     {
         public int Id { get; set; }
         public string Link { get; set; }
-
-        [BsonIgnore]
         public int StyleId { get; set; }
     }
 }

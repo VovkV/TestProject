@@ -10,6 +10,8 @@ using TestProjectCDM.Data.Interfaces;
 using TestProjectCDM.Data.Models;
 using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
+using TestProjectCDM.Implementation;
+using TestProjectCDM.Models;
 
 namespace TestProjectCDM.Controllers
 {
@@ -52,14 +54,14 @@ namespace TestProjectCDM.Controllers
             if(Session["Test"]==null)//check registration
                 return RedirectToAction("Index");
 
-            //var testChoises = new List<TestChoise>();
+            var testChoises = new List<TestChoise>();
 
-            //foreach (var style in _imgRepo.GetAllStyles())
-            //{
-            //    testChoises.Add(new TestChoise() { Count = 0, StyleId = style.Id });
-            //}
-            //((Test) Session["Test"]).TestChoises = testChoises;
-            //Session["Count"] = 0;//count of test choises
+            foreach (var style in _imgRepo.GetAllStyles())
+            {
+                testChoises.Add(new TestChoise() { Count = 0, StyleId = style.Id });
+            }
+            ((Test)Session["Test"]).TestChoises = testChoises;
+            Session["Count"] = 0;//count of test choises
             return View();
         }
 
@@ -71,29 +73,23 @@ namespace TestProjectCDM.Controllers
                 return RedirectToAction("Test");
             }
 
-            //if (id != null)
-            //{
-            //    var chosenStyle = ((Test)Session["Test"]).TestChoises.Find(x => x.StyleId == id);
-            //    chosenStyle.Count++;
-            //    Session["Count"] = (int) Session["Count"] + 1;
-            //}
-
-            //Random rnd = new Random();
-            //int styleMaxId = _imgRepo.GetAllStyles().Count;
-
-            //int imgCount = 2;//Count of images in one view
-            //List<Image> links = new List<Image>(imgCount);
-            //for (int i = 1; i <= imgCount; i++)
-            //{
-            //    int styleId = rnd.Next(1, styleMaxId + 1);
-            //    int imageId = rnd.Next(1, _imgRepo.GetImagesByStyleId(styleId).Count + 1);
-            //    var image = _imgRepo.GetImageById(styleId, imageId);
-            //    links.Add(image);
-            //}
-            List<Image> links = new List<Image>(2);
-            for (int i = 1; i <= 2; i++)
+            if (id != null)
             {
-                var image = new Image();
+                var chosenStyle = ((Test)Session["Test"]).TestChoises.Find(x => x.StyleId == id);
+                chosenStyle.Count++;
+                Session["Count"] = (int)Session["Count"] + 1;
+            }
+
+            Random rnd = new Random();
+            int styleMaxId = _imgRepo.GetAllStyles().Count;
+
+            int imgCount = 2;//Count of images in one view
+            List<Image> links = new List<Image>(imgCount);
+            for (int i = 1; i <= imgCount; i++)
+            {
+                int styleId = rnd.Next(1, styleMaxId + 1);
+                int imageId = rnd.Next(1, _imgRepo.GetImagesByStyleId(styleId).Count + 1);
+                var image = _imgRepo.GetImageById(styleId, imageId);
                 links.Add(image);
             }
 

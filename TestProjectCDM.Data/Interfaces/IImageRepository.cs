@@ -9,6 +9,7 @@ namespace TestProjectCDM.Data.Interfaces
 {
     public interface IImageRepository
     {
+        bool FillDb(string path);
         List<Style> GetAllStyles();
         Image GetImageById(int styleId, int imageId);
         List<Image> GetImagesByStyleId(int id);

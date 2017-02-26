@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,40 @@ namespace TestProjectCDM.Implementation
             var database = client.GetDatabase("TestProjectCDM");
             _collection = database.GetCollection<Style>("Styles");
         }
+
+        public bool FillDb(string path)
+        {
+            if (Directory.Exists(path))
+            {
+                var styleFolders = Directory.GetDirectories(path);
+                for (int i = 0; i < styleFolders.Length; i++)
+                {
+                    var style = new Style();
+                    style.Id = i + 1;
+                    style.Name = Path.GetFileNameWithoutExtension(styleFolders[i]);
+                    var images = Directory.GetFiles(styleFolders[i]);
+                    style.Images = new List<Image>(images.Length);
+                    for (int j = 0; j < images.Length; j++)
+                    {
+                        var image = new Image();
+                        image.Id = j + 1;
+                        image.StyleId = i + 1;
+                        image.Link = images[j];
+                        style.Images.Add(image);
+                    }
+
+                    this.UpsertStyle(style);
+
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
         #region IImageRepository
         public Image GetImageById(int styleId, int imageId)
         {
