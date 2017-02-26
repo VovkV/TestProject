@@ -24,30 +24,47 @@ namespace TestProjectCDM.Implementation
 
         public bool FillDb(string fullPath, string folderPath)
         {
-            
+
             if (Directory.Exists(fullPath))
             {
-                var styleFolders = Directory.GetDirectories(fullPath);
-                for (int i = 0; i < styleFolders.Length; i++)
+                try
                 {
-                    var style = new Style();
-                    style.Id = i + 1;
-                    style.Name = Path.GetFileNameWithoutExtension(styleFolders[i]);
-                    var images = Directory.GetFiles(styleFolders[i]);
-                    style.Images = new List<Image>(images.Length);
-                    for (int j = 0; j < images.Length; j++)
+                    _collection.DeleteMany(x => true);
+
+                    var styles = new List<Style>();
+                    var styleFolders = Directory.GetDirectories(fullPath);
+
+                    for (int i = 0; i < styleFolders.Length; i++)
                     {
-                        var image = new Image();
-                        image.Id = j + 1;
-                        image.StyleId = i + 1;
-                        image.Link = images[j].Replace(fullPath,"~" + folderPath).Replace(@"\", "/");
-                        style.Images.Add(image);
+                        var style = new Style
+                        {
+                            Id = i + 1,
+                            Name = Path.GetFileNameWithoutExtension(styleFolders[i])
+                        };
+                        var images = Directory.GetFiles(styleFolders[i]);
+                        style.Images = new List<Image>(images.Length);
+
+                        for (int j = 0; j < images.Length; j++)
+                        {
+                            var image = new Image
+                            {
+                                Id = j + 1,
+                                StyleId = i + 1,
+                                Link = images[j].Replace(fullPath, "~" + folderPath).Replace(@"\", "/")
+                            };
+                            style.Images.Add(image);
+                        }
+
+                        styles.Add(style);
                     }
+                    _collection.InsertMany(styles);
 
-                    this.UpsertStyle(style);
-
+                    return true;
                 }
-                return true;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
             else
             {
