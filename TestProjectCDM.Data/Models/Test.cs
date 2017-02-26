@@ -8,6 +8,10 @@ namespace TestProjectCDM.Data.Models
 {
     public class Test
     {
+        public Test()
+        {
+            TestChoises = new List<TestChoise>();
+        }
         public int Id { get; set; }
         public string Username { get; set; }
         public DateTime CompleteTime { get; set; }
