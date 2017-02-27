@@ -121,9 +121,8 @@ namespace TestProjectCDM.Controllers
         {
             //--- Block the transition from a direct link
             if (!ControllerContext.IsChildAction)
-                if(!Request.IsAjaxRequest())
-                    if (Session["Text"]==null)
-                        return RedirectToAction("Test");
+                if (!Request.IsAjaxRequest() || Session["Text"] == null)
+                    return RedirectToAction("Test");
             //---
 
             //--- Add user choice to session and increment count of steps
