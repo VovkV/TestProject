@@ -121,7 +121,7 @@ namespace TestProjectCDM.Controllers
         {
             //--- Block the transition from a direct link
             if (!ControllerContext.IsChildAction)
-                if (!Request.IsAjaxRequest() || Session["Text"] == null)
+                if (!Request.IsAjaxRequest() || Session["Test"] == null)
                     return RedirectToAction("Test");
             //---
 
