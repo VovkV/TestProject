@@ -163,8 +163,14 @@ namespace TestProjectCDM.Controllers
             if (Session["WinnerId"] == null)
                 return RedirectToAction("Index");
 
-            int styleId = ((int) Session["WinnerId"]);
+            var test = ((Test) Session["Test"]);
+            test.Id = new Guid();
+            test.CompleteTime = DateTime.Now;
+            _testsRepo.AddTest(test);
+
+            int styleId = ((int)Session["WinnerId"]);
             var result = _imgRepo.GetStyleById(styleId);
+
             Session.Clear();
 
             return PartialView(result);

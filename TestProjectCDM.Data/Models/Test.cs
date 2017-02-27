@@ -12,7 +12,7 @@ namespace TestProjectCDM.Data.Models
         {
             TestChoises = new List<TestChoise>();
         }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Username { get; set; }
         public DateTime CompleteTime { get; set; }
         public List<TestChoise> TestChoises { get; set; }
