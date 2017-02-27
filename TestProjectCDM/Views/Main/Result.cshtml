@@ -1,6 +1,23 @@
 ﻿@using TestProjectCDM.Data.Models
 @model Style
 
-<div class="text-center">
-    <h3>Best style for you is - @Model.Name</h3>
+<link />
+
+<div class="row jumbotron">
+    <p><h3 class="text-center">Best style for you is - @Model.Name</h3></p>
+    @foreach (var image in Model.Images)
+    {
+        <a href=@Href(image.Link) data-toggle="lightbox" data-gallery="example-gallery" class="col-lg-6">
+            <img src=@Href(image.Link) class="img-fluid img-thumbnail">
+        </a>
+    }
 </div>
+
+
+
+<script type="text/javascript">
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>

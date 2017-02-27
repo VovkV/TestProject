@@ -194,6 +194,7 @@ namespace TestProjectCDM.Controllers
 
             return PartialView(result);
         }
+
         public ActionResult Result()
         {
             if (Session["WinnerId"] == null)
