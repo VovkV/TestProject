@@ -120,10 +120,10 @@ namespace TestProjectCDM.Controllers
         public ActionResult TestPartial(int? id)
         {
             //--- Block the transition from a direct link
-            if (!ControllerContext.IsChildAction && !Request.IsAjaxRequest())
-            {
-                return RedirectToAction("Test");
-            }
+            if (!ControllerContext.IsChildAction)
+                if(!Request.IsAjaxRequest())
+                    if (Session["Text"]==null)
+                        return RedirectToAction("Test");
             //---
 
             //--- Add user choice to session and increment count of steps
@@ -207,7 +207,7 @@ namespace TestProjectCDM.Controllers
             int styleId = ((int)Session["WinnerId"]);
             var result = _imgRepo.GetStyleById(styleId);
 
-            Session.Clear();
+            Session.Abandon();
 
             return PartialView(result);
         }
