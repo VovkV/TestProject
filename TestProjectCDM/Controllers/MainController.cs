@@ -38,14 +38,29 @@ namespace TestProjectCDM.Controllers
             } while (wasShown);
             //---
 
-            //--- Add generated image id to session
-            ((Test)Session["Test"]).TestChoises.
-                Find(x => x.StyleId == styleId).ShowedImages.Add(result);
+            return result;
+        }
+
+        private int _GetNotInListStyle(List<Image> list)
+        {
+            var chosenImages = ((Test) Session["Test"]).TestChoises;
+            Random rnd = new Random();
+            int result;
+            bool inList;
+
+            //--- generate random style id and check is it exist in list
+            do
+            {
+                inList = false;
+                result = rnd.Next(1, _stylesCount + 1);
+                foreach (var image in list)
+                    if (image.StyleId == result)
+                        inList = true;
+            } while (inList);
             //---
 
             return result;
         }
-
         public MainController(IImageRepository imageRepository, ITestsRepository testsRepository)
         {
             _imgRepo = imageRepository;
@@ -121,8 +136,10 @@ namespace TestProjectCDM.Controllers
 
             var result = new List<Image>(_imgInStepCount);
 
-            //
+
             var choises = ((Test)Session["Test"]).TestChoises;
+
+            //--- If step is last
             if ((int) Session["Count"] >= _choisesMaxCount)
             {
                 var winners = choises.FindAll(x => x.Count == choises.Max(y => y.Count));
@@ -131,30 +148,49 @@ namespace TestProjectCDM.Controllers
                     Session["WinnerId"] = winners.First().StyleId;
                     return RedirectToAction("Result");
                 }
+
+                //--- If styles with biggest choises more then one -> will work till style will be one
                 else
                 {
                     for (int i = 0; i < _imgInStepCount; i++)
                     {
                         int styleId = winners[i].StyleId;
                         int imageId = _GetNotShownImage(styleId);
+
+                        //--- Add generated image id to session
+                        ((Test)Session["Test"]).TestChoises.
+                            Find(x => x.StyleId == styleId).ShowedImages.Add(imageId);
+                        //---
+
                         var image = _imgRepo.GetImageById(styleId, imageId);
 
                         result.Add(image);
                     }
                 }
+                //---
             }
+            //---
+
+            //--- Generate two random img from different styles
             else
             {
                 Random rnd = new Random();
                 for (int i = 0; i < _imgInStepCount; i++)
                 {
-                    int styleId = rnd.Next(1, _stylesCount + 1);
+                    int styleId = _GetNotInListStyle(result);
                     int imageId = _GetNotShownImage(styleId);
+
+                    //--- Add generated image id to session
+                    ((Test)Session["Test"]).TestChoises.
+                        Find(x => x.StyleId == styleId).ShowedImages.Add(imageId);
+                    //---
+
                     var image = _imgRepo.GetImageById(styleId, imageId);
 
                     result.Add(image);
                 }
             }
+            //---
 
             return PartialView(result);
         }
