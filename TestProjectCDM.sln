@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectCDM.Data", "Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectCDM.Implementation", "TestProjectCDM.Implementation\TestProjectCDM.Implementation.csproj", "{B5B00FCA-D5A4-429F-893F-803021B2ED4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectCDM.Tests", "TestProjectCDM.Tests\TestProjectCDM.Tests.csproj", "{BDC76F8C-9243-4AD5-8A1B-7F59B3446A00}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{B5B00FCA-D5A4-429F-893F-803021B2ED4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5B00FCA-D5A4-429F-893F-803021B2ED4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5B00FCA-D5A4-429F-893F-803021B2ED4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDC76F8C-9243-4AD5-8A1B-7F59B3446A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDC76F8C-9243-4AD5-8A1B-7F59B3446A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDC76F8C-9243-4AD5-8A1B-7F59B3446A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDC76F8C-9243-4AD5-8A1B-7F59B3446A00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,10 +1,7 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using TestProjectCDM.Data.Interfaces;
 using TestProjectCDM.Data.Models;
 
@@ -19,6 +16,7 @@ namespace TestProjectCDM.Implementation
             var database = client.GetDatabase("TestProjectCDM");
             _collection = database.GetCollection<Test>("Tests");
         }
+
         #region ITestsRepository
         public List<Test> GetAllTests()
         {

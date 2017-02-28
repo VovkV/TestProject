@@ -76,9 +76,11 @@ namespace TestProjectCDM.Implementation
         #region IImageRepository
         public Image GetImageById(int styleId, int imageId)
         {
-            var style = _collection.Find(p => p.Id == styleId).ToList().First();
+            Image result = null;
+            var style = _collection.Find(p => p.Id == styleId).ToList();
 
-            var result = style.Images.Find(x => x.Id == imageId);
+            if(style.Count != 0)
+                result = style.First().Images.Find(x => x.Id == imageId);
 
             return result;
         }
@@ -89,7 +91,8 @@ namespace TestProjectCDM.Implementation
 
             var filtered = _collection.Find(p => p.Id == id).ToList();
 
-            result = filtered.First();
+            if(filtered.Count !=0)
+                result = filtered.First();
 
             return result;
         }
@@ -141,9 +144,12 @@ namespace TestProjectCDM.Implementation
         {
             try
             {
-                var style = _collection.Find(p => p.Id == styleId).ToList().First();
-                if (style == null)
+                var styles = _collection.Find(p => p.Id == styleId).ToList();
+                if (styles.Count == 0)
                     return false;
+
+                var style = styles.First();
+
                 var result = style.Images.RemoveAll(x => x.Id == imageId);
 
                 _collection.ReplaceOne(
