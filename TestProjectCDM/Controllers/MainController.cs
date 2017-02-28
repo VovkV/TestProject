@@ -15,13 +15,22 @@ namespace TestProjectCDM.Controllers
         private IImageRepository _imgRepo;
         private ITestsRepository _testsRepo;
         private int _imgInStepCount;//Count of images in one view
-        private int _choisesMaxCount;//Count of test choises(steps to solve)
+        private int _stepsMaxCount;//Count of test choises(steps to solve)
         private int _stylesCount;//count of styles in db
 
         private int _GetNotShownImage(int styleId)
         {
-            var chosenImages = ((Test) Session["Test"]).TestChoises.
-                Find(x => x.StyleId == styleId).ShowedImages;
+            var steps = ((Test)Session["Test"]).Steps;
+            List<int> showedImages = new List<int>();
+            
+            foreach (var step in steps)
+            {
+                foreach (var image in step.ShowedImages.Where(x => x.StyleId == styleId))
+                {
+                    showedImages.Add(image.Id);
+                }
+            }
+            
             Random rnd = new Random();
             int result;
             int maxId = _imgRepo.GetStyleById(styleId).Images.Count;
@@ -32,7 +41,7 @@ namespace TestProjectCDM.Controllers
             {
                 wasShown = false;
                 result = rnd.Next(1, maxId + 1);
-                foreach (var imageId in chosenImages)
+                foreach (var imageId in showedImages)
                     if (imageId == result)
                         wasShown = true;
             } while (wasShown);
@@ -43,7 +52,6 @@ namespace TestProjectCDM.Controllers
 
         private int _GetNotInListStyle(List<Image> list)
         {
-            var chosenImages = ((Test) Session["Test"]).TestChoises;
             Random rnd = new Random();
             int result;
             bool inList;
@@ -61,13 +69,14 @@ namespace TestProjectCDM.Controllers
 
             return result;
         }
+
         public MainController(IImageRepository imageRepository, ITestsRepository testsRepository)
         {
             _imgRepo = imageRepository;
             _testsRepo = testsRepository;
 
             _imgInStepCount = 2;
-            _choisesMaxCount = 10;
+            _stepsMaxCount = 10;
             _stylesCount = _imgRepo.GetAllStyles().Count;
         }
 
@@ -88,22 +97,15 @@ namespace TestProjectCDM.Controllers
             var status = (bool)obj.SelectToken("success");
             //---
 
-            if (!status)//if captcha wasn't solved
-                return RedirectToAction("Index");
+            //if (!status)//if captcha wasn't solved
+            //    return RedirectToAction("Index");
 
-            //--- Add username and styles id to test information 
-            var testChoises = new List<TestChoise>();
-
-            foreach (var style in _imgRepo.GetAllStyles())
-            {
-                testChoises.Add(new TestChoise() { Count = 0, StyleId = style.Id });
-            }
-            var sessionTest = new Test() { Username = username, TestChoises = testChoises };
+            //--- Add username to test information 
+            var sessionTest = new Test() { Username = username};
             //---
 
             //--- Add test information and count of steps to session
             Session["Test"] = sessionTest;
-            Session["Count"] = 0;
             //---
 
             return RedirectToAction("Test");    
@@ -125,46 +127,41 @@ namespace TestProjectCDM.Controllers
                     return RedirectToAction("Test");
             //---
 
-            //--- Add user choice to session and increment count of steps
+            //--- Add user choice to session
             if (id != null)
             {
-                ((Test)Session["Test"]).TestChoises.Find(x => x.StyleId == id).Count++;
-                Session["Count"] = (int)Session["Count"] + 1;
+                var testStep = ((Test)Session["Test"]).Steps.Last().ChosenStyleId = (int)id;
             }
             //---
 
             var result = new List<Image>(_imgInStepCount);
 
-
-            var choises = ((Test)Session["Test"]).TestChoises;
-
             //--- If step is last
-            if ((int) Session["Count"] >= _choisesMaxCount)
+            if (((Test)Session["Test"]).Steps.Count >= _stepsMaxCount)
             {
-                var winners = choises.FindAll(x => x.Count == choises.Max(y => y.Count));
+                var winners = ((Test)Session["Test"]).GetWinnersId();
                 if (winners.Count == 1)
                 {
-                    Session["WinnerId"] = winners.First().StyleId;
+                    Session["WinnerId"] = winners.First();
                     return RedirectToAction("Result");
                 }
 
                 //--- If styles with biggest choises more then one -> will work till style will be one
                 else
                 {
+                    var step = new TestStep();
+
                     for (int i = 0; i < _imgInStepCount; i++)
                     {
-                        int styleId = winners[i].StyleId;
+                        int styleId = winners[i];
                         int imageId = _GetNotShownImage(styleId);
-
-                        //--- Add generated image id to session
-                        ((Test)Session["Test"]).TestChoises.
-                            Find(x => x.StyleId == styleId).ShowedImages.Add(imageId);
-                        //---
 
                         var image = _imgRepo.GetImageById(styleId, imageId);
 
+                        step.ShowedImages.Add(image);
                         result.Add(image);
                     }
+                    ((Test) Session["Test"]).AddStep(step); //Add new step
                 }
                 //---
             }
@@ -173,21 +170,19 @@ namespace TestProjectCDM.Controllers
             //--- Generate two random img from different styles
             else
             {
+                var step = new TestStep();
                 Random rnd = new Random();
                 for (int i = 0; i < _imgInStepCount; i++)
                 {
                     int styleId = _GetNotInListStyle(result);
                     int imageId = _GetNotShownImage(styleId);
 
-                    //--- Add generated image id to session
-                    ((Test)Session["Test"]).TestChoises.
-                        Find(x => x.StyleId == styleId).ShowedImages.Add(imageId);
-                    //---
-
                     var image = _imgRepo.GetImageById(styleId, imageId);
 
+                    step.ShowedImages.Add(image);
                     result.Add(image);
                 }
+                ((Test)Session["Test"]).Steps.Add(step);//Add new step
             }
             //---
 

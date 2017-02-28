@@ -49,7 +49,7 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Style.cs" />
     <Compile Include="Models\Test.cs" />
-    <Compile Include="Models\TestChoise.cs" />
+    <Compile Include="Models\TestStep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
