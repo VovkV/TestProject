@@ -97,8 +97,8 @@ namespace TestProjectCDM.Controllers
             var status = (bool)obj.SelectToken("success");
             //---
 
-            if (!status)//if captcha wasn't solved
-                return RedirectToAction("Index");
+            //if (!status)//if captcha wasn't solved
+            //    return RedirectToAction("Index");
 
             //--- Add username to test information 
             var sessionTest = new Test() { Username = username};
@@ -187,6 +187,37 @@ namespace TestProjectCDM.Controllers
             //---
 
             return PartialView(result);
+        }
+
+        public ActionResult PrevStep()
+        {
+            //--- Block the transition from a direct link
+            if (!Request.IsAjaxRequest() || Session["Test"] == null)
+                return RedirectToAction("Test");
+            //---
+
+            var steps = ((Test) Session["Test"]).Steps;
+            var result = new List<Image>(_imgInStepCount);
+            steps.RemoveAt(steps.Count - 1);
+            var lastStep = steps.Last();
+
+            var step = new TestStep();
+
+            for (int i = 0; i < _imgInStepCount; i++)
+            {
+                int styleId = lastStep.ShowedImages[i].StyleId;
+                int imageId = lastStep.ShowedImages[i].Id;
+
+                var image = _imgRepo.GetImageById(styleId, imageId);
+
+                step.ShowedImages.Add(image);
+                result.Add(image);
+            }
+
+            steps.RemoveAt(steps.Count - 1);
+            ((Test)Session["Test"]).Steps.Add(step); //Add new step
+
+            return PartialView("TestPartial",result);
         }
 
         public ActionResult Result()

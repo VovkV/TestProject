@@ -3,7 +3,17 @@
 
 @model IEnumerable<Image>
 
-
+@if (((Test)Session["Test"]).Steps.Count > 1)
+{
+    <div>
+        @Ajax.ActionLink(
+        "<-Prev",
+        "PrevStep",
+        new { area = "" },
+        new AjaxOptions() { UpdateTargetId = "img-update" },
+        new { @class = "btn btn-default" })
+    </div>
+}
 @foreach (var image in Model)
 {
     @Ajax.RawActionLink(
@@ -17,3 +27,4 @@
             UpdateTargetId = "img-update"
         })
 }
+
