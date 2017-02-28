@@ -97,8 +97,8 @@ namespace TestProjectCDM.Controllers
             var status = (bool)obj.SelectToken("success");
             //---
 
-            //if (!status)//if captcha wasn't solved
-            //    return RedirectToAction("Index");
+            if (!status)//if captcha wasn't solved
+                return RedirectToAction("Index");
 
             //--- Add username to test information 
             var sessionTest = new Test() { Username = username};
@@ -130,7 +130,7 @@ namespace TestProjectCDM.Controllers
             //--- Add user choice to session
             if (id != null)
             {
-                var testStep = ((Test)Session["Test"]).Steps.Last().ChosenStyleId = (int)id;
+                ((Test)Session["Test"]).Steps.Last().ChosenStyleId = (int)id;
             }
             //---
 
