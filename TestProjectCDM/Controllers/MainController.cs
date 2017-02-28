@@ -161,7 +161,7 @@ namespace TestProjectCDM.Controllers
                         step.ShowedImages.Add(image);
                         result.Add(image);
                     }
-                    ((Test) Session["Test"]).AddStep(step); //Add new step
+                    ((Test) Session["Test"]).Steps.Add(step); //Add new step
                 }
                 //---
             }

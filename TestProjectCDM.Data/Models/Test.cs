@@ -14,22 +14,6 @@ namespace TestProjectCDM.Data.Models
             Steps = new List<TestStep>();
         }
 
-        public bool AddStep(TestStep step)
-        {
-            step.Id = Steps.Count;
-            Steps.Add(step);
-            return true;
-        }
-
-        public bool DeleteLastStep()
-        {
-            if (Steps.Count == 0)
-                return false;
-
-            Steps.RemoveAt(Steps.Count);
-            return true;
-        }
-
         public List<int> GetWinnersId()
         {
             var result = new List<int>();
