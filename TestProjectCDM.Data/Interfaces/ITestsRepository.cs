@@ -11,6 +11,6 @@ namespace TestProjectCDM.Data.Interfaces
     {
         List<Test> GetAllTests();
         bool AddTest(Test test);
-        bool RemoveTestById(int id);
+        bool RemoveTestByGuid(Guid id);
     }
 }

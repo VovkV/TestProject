@@ -39,7 +39,7 @@ namespace TestProjectCDM.Implementation
             
         }
 
-        public bool RemoveTestById(int id)
+        public bool RemoveTestByGuid(Guid id)
         {
             try
             {
